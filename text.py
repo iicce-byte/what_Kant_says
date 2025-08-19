@@ -1,5 +1,8 @@
 import collections
 import re
+import random
+# import draw
+# from matplotlib import pyplot as plt
 
 file1 = '../data/Kant/fundamental_principles_of_the_metaphysic_of_morals' # 道德形而上学原理
 file2 = '../data/Kant/the_critique_of_pure_reason'      # 纯粹理性批判
@@ -76,5 +79,15 @@ def load_corpus_Kant(file_list, token_type='char', max_tokens=-1):
         corpus = corpus[:max_tokens]
     return corpus, vocab
 
-corpus, vocab = load_corpus_Kant(file1)
-print(len(corpus), '\n', len(vocab))
+
+# corpus, vocab = load_corpus_Kant(file1)
+# print(len(corpus), '\n', len(vocab))
+# tokens = tokenize(read_and_merge_files([file1]))
+# corpus = [token for line in tokens for token in line]
+# vocab = Vocab(corpus)
+# print(vocab.token_freqs[:10])
+# freqs = [freq for token, freq in vocab.token_freqs]
+# draw.plot(freqs, xlabel='token: x', ylabel='frequency: n(x)',
+#          xscale='log', yscale='log')
+# plt.ioff()
+# plt.show()
