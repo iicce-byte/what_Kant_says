@@ -1,6 +1,9 @@
 import time
 import numpy as np
 import torch
+import torch
+from torch import nn
+from torch.nn import functional as F
 
 class Timer:
     """Record multiple running times."""
@@ -49,3 +52,21 @@ class Accumulator:
 
     def __getitem__(self, idx):
         return self.data[idx]
+
+def seq_mask(X, valid_lens, value):
+    maxlen = X.shape(1)
+    mask = torch.arange((maxlen), dtype=torch.float32,
+                device=X.device)[None, :] < valid_lens[:, None]
+    X[~mask] = value
+    return X
+
+def masked_softmax(X, valid_lens):
+    if valid_lens is None:
+        return F.softmax(X, dim=-1)
+    shape = X.shape
+    if valid_lens.dim() == 1:
+        valid_lens = torch.repeat_interleave(valid_lens, shape[1])
+    else:
+        valid_lens = valid_lens.reshape(-1)
+    X = seq_mask(X.reshape(-1, shape[-1]), valid_lens, value=-1e6).reshape(shape)
+    return F.softmax(X, dim=-1)
