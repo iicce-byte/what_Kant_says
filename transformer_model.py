@@ -221,9 +221,9 @@ file4 = '../data/Kant/Kant\'s_critique_of_judgement'    # 判断力批判
 files = [file1, file2, file3]
 
 
-num_hiddens, num_layers, dropout, batch_size, num_steps = 32, 2, 0.1, 64, 10
+num_hiddens, num_layers, dropout, batch_size, num_steps = 256, 6, 0.1, 64, 50
 lr, num_epochs, device = 0.005, 200, lll.try_gpu()
-ffn_num_input, ffn_num_hiddens, num_heads = 32, 64, 4
+ffn_num_input, ffn_num_hiddens, num_heads = 32, 512, 8
 key_size, query_size, value_size = 32, 32, 32
 norm_shape = [32]
 
@@ -374,5 +374,4 @@ def train(net, train_iter, test_iter, vocab, lr, num_epochs, device):
                   f'{metric[1] / timer.stop():.1f} tokens/sec on {str(device)}')
 
 
-import model
 train(net, train_iter, test_iter, vocab, lr, 10, device)
