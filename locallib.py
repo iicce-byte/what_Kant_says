@@ -54,7 +54,7 @@ class Accumulator:
         return self.data[idx]
 
 def seq_mask(X, valid_lens, value):
-    maxlen = X.shape(1)
+    maxlen = X.shape[1]
     mask = torch.arange((maxlen), dtype=torch.float32,
                 device=X.device)[None, :] < valid_lens[:, None]
     X[~mask] = value
